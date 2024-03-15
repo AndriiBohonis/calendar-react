@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Login from './form/Login';
+import Login from './form/LoginForm';
 import RegisterForm from './form/RegisterForm';
 
 import { getToken } from '../api';
