@@ -5,7 +5,6 @@ import {
   endOfMonth,
   format,
   getDay,
-  isToday,
   startOfMonth,
   addMonths,
   subMonths,
@@ -16,8 +15,9 @@ import CalendarDialog from './Dialog';
 import { IEventResponse } from '../types';
 import { useSUserStore } from '../stor/userStote';
 import MySnackbar from './MySnackbar';
-import { sliceString } from '../helper';
+
 import WeekDays from './WeekDays';
+import { DayInMonth } from './DayInMonth';
 
 interface EventCalendarProps {
   events: IEventResponse[];
@@ -39,7 +39,7 @@ const EventCalendar = ({ events }: EventCalendarProps) => {
     end: lastDayOfMonth,
   });
 
-  const startingDayIndex = getDay(firstDayOfMonth);
+  const startingDay = getDay(firstDayOfMonth);
 
   const eventsByDate = useMemo(() => {
     return events.reduce((acc: { [key: string]: IEventResponse[] }, event) => {
@@ -98,50 +98,12 @@ const EventCalendar = ({ events }: EventCalendarProps) => {
           }}>
           <WeekDays />
 
-          {Array.from({ length: startingDayIndex }).map((_, index) => (
-            <Box
-              key={`empty-${index}`}
-              sx={{
-                borderRadius: '4px',
-                padding: '8px',
-                textAlign: 'center',
-              }}
-            />
-          ))}
-          {daysInMonth.map((day, index) => {
-            const event_date = format(day, 'yyyy-MM-dd');
-            const todaysEvents = eventsByDate[event_date] || [];
-            return (
-              <Box
-                onClick={() => handelDayClick(event_date)}
-                key={index}
-                sx={{
-                  cursor: 'pointer',
-                  height: '100px',
-                  border: '1px solid #ccc',
-                  borderRadius: '4px',
-                  padding: '8px',
-                  overflow: 'scroll',
-                  backgroundColor: isToday(day) ? '#f0f0f0' : 'initial',
-                }}>
-                {format(day, 'd')}
-                {todaysEvents.map(event => (
-                  <Box
-                    key={event.id}
-                    sx={{
-                      backgroundColor: event.done ? '#00c853' : '#e4e6dc',
-                      color: '#000',
-                      borderRadius: '4px',
-                      padding: '4px 8px',
-                      marginBottom: '4px',
-                      maxWidth: '100%',
-                    }}>
-                    {sliceString(event.description, 20)}
-                  </Box>
-                ))}
-              </Box>
-            );
-          })}
+          <DayInMonth
+            startingDay={startingDay}
+            daysInMonth={daysInMonth}
+            handelDayClick={handelDayClick}
+            eventsByDate={eventsByDate}
+          />
         </Box>
       </Box>
       <CalendarDialog open={open} setOpen={setOpen} dayDate={dayDate} />
