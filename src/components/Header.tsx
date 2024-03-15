@@ -16,8 +16,7 @@ export default function Header() {
     useSUserStore();
   useEffect(() => {
     const token = localStorage.getItem('token');
-
-    if (token) {
+    if (token && !error) {
       getToken(token);
       getUser();
     }
@@ -36,7 +35,7 @@ export default function Header() {
           justifyContent: 'flex-end',
           alignItems: 'center',
         }}>
-        {user && (
+        {isUser && (
           <>
             <Typography sx={{ color: 'white', px: 5 }} variant='h6'>
               Welcome {user?.name}
@@ -46,7 +45,7 @@ export default function Header() {
             </Button>
           </>
         )}
-        {!user && (
+        {!isUser && (
           <ButtonGroup sx={{ px: 6, py: 2 }}>
             <Button onClick={() => setOpenRegister(true)}>register</Button>
             <Button onClick={() => setOpenLogin(true)}>login</Button>

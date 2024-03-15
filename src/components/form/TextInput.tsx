@@ -1,7 +1,7 @@
 import { Box, Button, Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { useEventStore } from '../stor/eventStore';
+import { useEventStore } from '../../stor/eventStore';
 
 export default function TextInput({ dayDate }: { dayDate: string }) {
   const [text, setText] = useState('');
@@ -27,6 +27,7 @@ export default function TextInput({ dayDate }: { dayDate: string }) {
     <form onSubmit={submit}>
       <Stack direction='row'>
         <TextField
+          autoFocus
           autoComplete='off'
           fullWidth
           value={text}

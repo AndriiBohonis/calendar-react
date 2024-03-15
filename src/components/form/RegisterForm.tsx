@@ -1,5 +1,5 @@
 import { Box, Button, Dialog, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IUserRegister } from '../../types';
 
 interface IRegisterForm {
@@ -28,6 +28,9 @@ export default function RegisterForm({
     } else {
       setInputError('field cannot be empty');
     }
+  };
+
+  useEffect(() => {
     if (isUser) {
       setInputError('');
       setPassword('');
@@ -35,7 +38,7 @@ export default function RegisterForm({
       setName('');
       setOpenRegister(false);
     }
-  };
+  }, [isUser]);
   return (
     <Dialog
       open={openRegister}
@@ -45,6 +48,7 @@ export default function RegisterForm({
       <form onSubmit={submit}>
         <Stack sx={{ py: 4, px: 4 }} justifyContent={'center'} gap={3}>
           <TextField
+            autoFocus
             autoComplete='off'
             label='Name'
             value={name}

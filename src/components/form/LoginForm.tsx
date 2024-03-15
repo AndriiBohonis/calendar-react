@@ -1,5 +1,5 @@
 import { Box, Button, Dialog, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IUserLogin } from '../../types';
 interface ILoginForm {
   openLogin: boolean;
@@ -25,12 +25,15 @@ export default function LoginForm({
     } else {
       setInputError('field cannot be empty');
     }
+  };
+
+  useEffect(() => {
     if (isUser) {
       setPassword('');
       setEmail('');
       setOpenLogin(false);
     }
-  };
+  }, [isUser]);
 
   const handleClose = () => {
     setOpenLogin(false);
@@ -44,6 +47,7 @@ export default function LoginForm({
       <form onSubmit={submit}>
         <Stack sx={{ py: 4, px: 4 }} justifyContent={'center'} gap={3}>
           <TextField
+            autoFocus
             autoComplete='off'
             label='Login'
             value={email}

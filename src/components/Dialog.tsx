@@ -2,7 +2,7 @@ import Dialog from '@mui/material/Dialog';
 
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
-import TextInput from './TextInput';
+import TextInput from './form/TextInput';
 import { Box, List, Typography } from '@mui/material';
 import { EventItem } from './EventItem';
 import { IEventResponse } from '../types';

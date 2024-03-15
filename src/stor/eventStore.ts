@@ -7,10 +7,11 @@ import {
   updateStatusEvent,
 } from '../api';
 import { IEvent, ITodoEventVariables } from '../types';
+import { AxiosError } from 'axios';
 
 export const useEventStore = create<IEventStoreType>()(set => ({
   loading: false,
-  error: '',
+  error: null,
   events: [],
   createEvent: async (body: IEvent) => {
     set({ loading: true });
@@ -22,8 +23,9 @@ export const useEventStore = create<IEventStoreType>()(set => ({
         loading: false,
       }));
     } catch (error) {
-      set({ loading: false });
-      console.error(error);
+      if (error instanceof AxiosError) {
+        set({ loading: false, error: error });
+      }
     }
   },
   getEvents: async () => {
@@ -43,8 +45,9 @@ export const useEventStore = create<IEventStoreType>()(set => ({
 
       set({ loading: false });
     } catch (error) {
-      set({ loading: false });
-      console.log(error);
+      if (error instanceof AxiosError) {
+        set({ loading: false, error: error });
+      }
     }
   },
   updateEvent: async (body: ITodoEventVariables) => {
@@ -63,8 +66,9 @@ export const useEventStore = create<IEventStoreType>()(set => ({
         loading: false,
       }));
     } catch (error) {
-      console.error(error);
-      set(state => ({ ...state, loading: false }));
+      if (error instanceof AxiosError) {
+        set({ loading: false, error: error });
+      }
     }
   },
   removeEvent: async id => {
@@ -76,8 +80,9 @@ export const useEventStore = create<IEventStoreType>()(set => ({
         loading: false,
       }));
     } catch (error) {
-      set({ loading: false });
-      console.log(error);
+      if (error instanceof AxiosError) {
+        set({ loading: false, error: error });
+      }
     }
   },
 }));
