@@ -21,7 +21,7 @@ export interface IUserType {
 
 export interface IEventStoreType {
   events: IEventResponse[];
-  error: string | undefined;
+  error: AxiosError | null;
   loading: boolean;
   createEvent: (body: IEvent) => Promise<void>;
   getEvents: () => Promise<void>;

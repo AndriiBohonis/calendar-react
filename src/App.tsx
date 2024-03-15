@@ -1,12 +1,14 @@
 import EventCalendar from './components/EventCalendar';
 
 import { useEventStore } from './stor/eventStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSUserStore } from './stor/userStote';
 import Header from './components/Header';
+import MySnackbar from './components/MySnackbar';
 
 const App = () => {
-  const { events, getEvents } = useEventStore();
+  const [openAlert, setOpenAlert] = useState(false);
+  const { events, getEvents, error } = useEventStore();
   const { user } = useSUserStore();
 
   useEffect(() => {
@@ -17,6 +19,11 @@ const App = () => {
     <>
       <Header />
       {events && <EventCalendar events={events} />}
+      <MySnackbar
+        openAlert={openAlert}
+        setOpenAlert={setOpenAlert}
+        message={error?.message || ''}
+      />
     </>
   );
 };

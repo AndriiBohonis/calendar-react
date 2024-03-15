@@ -17,15 +17,12 @@ export const useSUserStore = create<IUserType>()(set => ({
       set({
         user: data.user,
         isUser: true,
+        loading: false,
       });
-
-      set({ loading: false });
     } catch (error) {
       if (error instanceof AxiosError) {
         set({ loading: false, error: error });
       }
-
-      console.log(error);
     }
   },
   loginUser: async body => {
@@ -37,9 +34,8 @@ export const useSUserStore = create<IUserType>()(set => ({
       set({
         user: data.user,
         isUser: true,
+        loading: false,
       });
-
-      set({ loading: false });
     } catch (error) {
       if (error instanceof AxiosError) {
         set({ loading: false, error: error });
@@ -52,9 +48,9 @@ export const useSUserStore = create<IUserType>()(set => ({
       const user = await getUser();
       set({
         user,
+        isUser: true,
+        loading: false,
       });
-
-      set({ loading: false });
     } catch (error) {
       set({ loading: false });
       if (error instanceof AxiosError) {
@@ -70,9 +66,9 @@ export const useSUserStore = create<IUserType>()(set => ({
       getToken('');
       set({
         user: null,
+        isUser: false,
+        loading: false,
       });
-
-      set({ loading: false });
     } catch (error) {
       if (error instanceof AxiosError) {
         set({ loading: false, error: error });
