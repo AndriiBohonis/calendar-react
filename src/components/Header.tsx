@@ -4,7 +4,7 @@ import Login from './form/LoginForm';
 import RegisterForm from './form/RegisterForm';
 
 import { getToken } from '../api';
-import { useSUserStore } from '../stor/userStote';
+import { useSUserStore } from '../store/userStote';
 import MySnackbar from './MySnackbar';
 
 export default function Header() {

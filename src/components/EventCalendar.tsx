@@ -13,7 +13,7 @@ import { useMemo, useState } from 'react';
 import CalendarDialog from './Dialog';
 
 import { IEventResponse } from '../types';
-import { useSUserStore } from '../stor/userStote';
+import { useSUserStore } from '../store/userStote';
 import MySnackbar from './MySnackbar';
 
 import WeekDays from './WeekDays';

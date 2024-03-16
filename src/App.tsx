@@ -1,8 +1,8 @@
 import EventCalendar from './components/EventCalendar';
 
-import { useEventStore } from './stor/eventStore';
+import { useEventStore } from './store/eventStore';
 import { useEffect, useState } from 'react';
-import { useSUserStore } from './stor/userStote';
+import { useSUserStore } from './store/userStote';
 import Header from './components/Header';
 import MySnackbar from './components/MySnackbar';
 
