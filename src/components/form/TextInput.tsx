@@ -1,7 +1,7 @@
 import { Box, Button, Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { useEventStore } from '../../stor/eventStore';
+import { useEventStore } from '../../store/eventStore';
 
 export default function TextInput({ dayDate }: { dayDate: string }) {
   const [text, setText] = useState('');

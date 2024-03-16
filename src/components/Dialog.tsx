@@ -6,7 +6,7 @@ import TextInput from './form/TextInput';
 import { Box, List, Typography } from '@mui/material';
 import { EventItem } from './EventItem';
 import { IEventResponse } from '../types';
-import { useEventStore } from '../stor/eventStore';
+import { useEventStore } from '../store/eventStore';
 import { forwardRef, useEffect, useState } from 'react';
 
 export default function CalendarDialog({
