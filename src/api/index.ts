@@ -35,11 +35,11 @@ export const loginUser = async (body: IUserLogin) => {
   return response.data;
 };
 export const getUser = async () => {
-  const response = await axios.post<IUser>('auth/me', config);
+  const response = await axios.post<IUser>('me', config);
   return response.data;
 };
 export const logoutUser = async () => {
-  const response = await axios.post('auth/logout');
+  const response = await axios.post('logout');
   return response.data;
 };
 
