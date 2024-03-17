@@ -46,11 +46,12 @@ export const useSUserStore = create<IUserType>()(set => ({
     set({ loading: true });
     try {
       const user = await getUser();
-      set({
-        user,
-        isUser: true,
-        loading: false,
-      });
+      if (user.name)
+        set({
+          user,
+          isUser: true,
+          loading: false,
+        });
     } catch (error) {
       set({ loading: false });
       if (error instanceof AxiosError) {
